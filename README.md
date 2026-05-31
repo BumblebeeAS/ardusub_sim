@@ -38,7 +38,7 @@ Install `rocker`: https://github.com/osrf/rocker#installation
 Then start the container:
 
 ```bash
-rocker --devices /dev/dri --x11 --network=host \
+rocker --devices /dev/dri --x11 --network=host --ipc=host \
   --volume ~/workspaces/bluerov_ws:/root/HOST/bluerov_ws -- \
   ardusub_sim:humble
 ```
