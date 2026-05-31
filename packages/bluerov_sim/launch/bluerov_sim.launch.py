@@ -198,21 +198,12 @@ def launch_setup(context, *args, **kwargs):
         ],
     )
 
-    # # ArduSub must be listening on UDP 9002 before the model is spawned,
-    # # otherwise lock_step=1 causes Gazebo to freeze waiting for a response.
-    # # Start ArduSub and Gazebo first, delay spawning the model.
-    # delayed_spawn = TimerAction(
-    #     period=5.0,
-    #     actions=[],
-    # )
-
     result = [
         ardusub_interface_launch,
         gz_sim_launch,
         gz_spawner,
         spawn_exit_handler,
         gz_bridge,
-        # delayed_spawn,
         robot_state_publisher_node,
         world_objects_node,
     ]

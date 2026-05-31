@@ -69,6 +69,10 @@ ros2 launch bluerov_sim bluerov_sim.launch.py \
 In a second shell inside the same container:
 
 ```bash
+rocker --devices /dev/dri --x11 --network=host --ipc=host \
+  --volume ~/workspaces/bluerov_ws:/root/HOST/bluerov_ws -- \
+  ardusub_sim:humbles
+
 cd /root/HOST/bluerov_ws
 source /opt/ros/humble/setup.bash
 source install/setup.bash
