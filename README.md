@@ -8,6 +8,15 @@ Clone this repo into `~/workspaces/bluerov_ws/src`. If you prefer to place it in
 
 ## Get the Dependencies
 
+Install `vcstool` (add the ROS 2 apt repository first, [example](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html#setup-sources)):
+
+```bash
+sudo apt-get update
+sudo apt-get install python3-vcstool
+```
+
+Then get the dependencies:
+
 ```bash
 cd ~/workspaces/bluerov_ws
 vcs import src < src/ardusub_sim/dependencies.repos
