@@ -24,30 +24,6 @@
     </inertial>
   </link>
 
-  <!-- ==================== DVL ==================== -->
-  <joint name="dvl_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="dvl_link"/>
-    <!-- SDF dvl_link pose: 0 0 -0.1 0 0 -1.57 -->
-    <origin xyz="0 0 -0.1" rpy="0 0 -1.57"/>
-  </joint>
-
-  <link name="dvl_link">
-    <collision>
-      <!-- SDF collision pose: 0 0 0 3.14159 0 0 -->
-      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
-      <geometry>
-        <cylinder radius="0.093" length="0.203"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="0.001"/>
-      <inertia ixx="0.0195872" ixy="0" ixz="0"
-               iyy="0.0195872" iyz="0"
-               izz="0.0151357"/>
-    </inertial>
-  </link>
-
   <!-- ==================== Front camera ==================== -->
   <joint name="front_cam_joint" type="fixed">
     <parent link="base_link"/>

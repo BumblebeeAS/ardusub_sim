@@ -68,7 +68,6 @@ def launch_setup(context, *args, **kwargs):
     launch_mavros = LaunchConfiguration("mavros")
     use_sim_time = LaunchConfiguration("use_sim_time")
     odom_source = LaunchConfiguration("odom_source").perform(context)
-    dvl_topic = LaunchConfiguration("dvl_topic")
     world_name = LaunchConfiguration("world_name").perform(context)
     home = LaunchConfiguration("home").perform(context)
     home_str = home if home else _home_from_world(world_name)
@@ -109,19 +108,9 @@ def launch_setup(context, *args, **kwargs):
                 parameters=[{"use_sim_time": use_sim_time}],
             )
         )
-    elif odom_source == "dvl":
-        actions.append(
-            Node(
-                package="ardusub_interface",
-                executable="dvl_to_mavros",
-                name="dvl_to_mavros",
-                output="screen",
-                parameters=[{"use_sim_time": use_sim_time, "dvl_topic": dvl_topic}],
-            )
-        )
     elif odom_source not in ("none", "false"):
         raise ValueError(
-            "odom_source must be one of: ground_truth, dvl, none"
+            "odom_source must be one of: ground_truth, none"
         )
 
     return actions
@@ -157,12 +146,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "odom_source",
             default_value="ground_truth",
-            description="Odometry adapter to publish to /mavros/odometry/out: ground_truth, dvl, or none",
-        ),
-        DeclareLaunchArgument(
-            "dvl_topic",
-            default_value="/bluerov/dvl/velocity",
-            description="DVL topic used when odom_source:=dvl",
+            description="Odometry adapter to publish to /mavros/odometry/out: ground_truth or none",
         ),
     ]
 

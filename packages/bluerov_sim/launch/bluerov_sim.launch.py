@@ -291,7 +291,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "odom_source",
             default_value="ground_truth",
-            description="Odometry adapter for ArduSub/MAVROS: ground_truth, dvl, or none",
+            description="Odometry adapter for ArduSub/MAVROS: ground_truth or none",
         ),
         DeclareLaunchArgument(
             "urdf_path",

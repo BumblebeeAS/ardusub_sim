@@ -104,6 +104,5 @@ Useful launch switches:
 
 ```bash
 odom_source:=ground_truth   # default
-odom_source:=dvl            # use DVL twist adapter
 odom_source:=none           # no odometry adapter
 ```

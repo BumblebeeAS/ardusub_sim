@@ -15,27 +15,25 @@
   <depend>tf2</depend>
   <depend>tf2_ros</depend>
 
+  <!-- Required at build time to add its worlds/ dir to
+   GZ_SIM_RESOURCE_PATH via an env hook. -->
+  <depend>dave_worlds</depend>
+
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>ros_gz_bridge</exec_depend>
   <exec_depend>ros_gz_sim</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>mavros_msgs</exec_depend>
-  <exec_depend>ardusub_interface</exec_depend>
-  <exec_depend>dvl_msgs</exec_depend>
-  <!-- Upstream deps pulled in via dependencies.repos (not in the base image):
-       the ArduPilot Gazebo plugin loaded by model.sdf, the DVL sensor mesh, and
-       the open-water worlds. -->
-  <exec_depend>ardupilot_gazebo</exec_depend>
-  <exec_depend>dave_robot_models</exec_depend>
-  <exec_depend>dave_sensor_models</exec_depend>
-  <!-- <depend> (not exec): CMakeLists find_package(dave_worlds) at build time
-       to add its worlds/ dir to GZ_SIM_RESOURCE_PATH via an env hook. -->
-  <depend>dave_worlds</depend>
   <exec_depend>sdformat_urdf</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>joint_state_publisher</exec_depend>
   <exec_depend>visualization_msgs</exec_depend>
   <exec_depend>tf_transformations</exec_depend>
+
+  <exec_depend>ardupilot_gazebo</exec_depend>
+  <exec_depend>dave_robot_models</exec_depend>
+
+  <exec_depend>ardusub_interface</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

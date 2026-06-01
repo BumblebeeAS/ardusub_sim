@@ -28,8 +28,8 @@ mavros:
       - rc_io
       - setpoint_position
       - vision_pose
-      - odometry    # REQUIRED: dvl_to_mavros and ground_truth_to_mavros
-                    # publish to /mavros/odometry/out (odometry plugin's input)
+      - odometry    # REQUIRED: ground_truth_to_mavros publishes to
+                    # /mavros/odometry/out (odometry plugin's input)
 
 mavros_node:
   ros__parameters:

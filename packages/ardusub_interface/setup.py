@@ -25,7 +25,6 @@ setup(
     entry_points={
         "console_scripts": [
             "ground_truth_to_mavros = ardusub_interface.ground_truth_to_mavros:main",
-            "dvl_to_mavros = ardusub_interface.dvl_to_mavros:main",
         ],
     },
 )
