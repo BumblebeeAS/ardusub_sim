@@ -71,7 +71,7 @@ In a second shell inside the same container:
 ```bash
 rocker --devices /dev/dri --x11 --network=host --ipc=host \
   --volume ~/workspaces/bluerov_ws:/root/HOST/bluerov_ws -- \
-  ardusub_sim:humbles
+  ardusub_sim:humble
 
 cd /root/HOST/bluerov_ws
 source /opt/ros/humble/setup.bash
