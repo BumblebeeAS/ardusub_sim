@@ -1,5 +1,4 @@
 import os
-import xml.etree.ElementTree as ET
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
@@ -66,34 +65,6 @@ def launch_setup(context, *args, **kwargs):
         gz_args += " -r"
     if debug.perform(context) == "true":
         gz_args += f" -v {verbose.perform(context)}"
-
-    # Locate the world file so helper nodes can derive visualization metadata.
-    world_full_path = ""
-    gz_world_name = ""
-    if world_filename:
-        resource_path = os.environ.get("GZ_SIM_RESOURCE_PATH", "")
-        search_dirs = resource_path.split(":") if resource_path else []
-        for d in search_dirs:
-            candidate = os.path.join(d, world_filename)
-            if os.path.exists(candidate):
-                world_full_path = candidate
-                break
-
-        if world_full_path:
-            print(f"Parsing world file metadata: {world_full_path}")
-            try:
-                tree = ET.parse(world_full_path)
-                root = tree.getroot()
-                world_elem = root.find("world")
-                gz_world_name = (
-                    world_elem.get("name", "") if world_elem is not None else ""
-                )
-            except Exception as e:
-                print(f"World XML parsing failed: {e}.")
-        else:
-            print(
-                "World file not found in GZ_SIM_RESOURCE_PATH. Using default coordinates."
-            )
 
     ardusub_interface_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -187,17 +158,6 @@ def launch_setup(context, *args, **kwargs):
         ],
     )
 
-    world_objects_node = Node(
-        package="bluerov_sim",
-        executable="world_objects_to_markers.py",
-        parameters=[
-            {
-                "world_file": world_full_path,
-                "gz_world_name": gz_world_name,
-            }
-        ],
-    )
-
     result = [
         ardusub_interface_launch,
         gz_sim_launch,
@@ -205,7 +165,6 @@ def launch_setup(context, *args, **kwargs):
         spawn_exit_handler,
         gz_bridge,
         robot_state_publisher_node,
-        world_objects_node,
     ]
     return result
 
