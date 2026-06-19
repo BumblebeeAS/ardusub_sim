@@ -51,12 +51,12 @@ Inside the container:
 cd /root/HOST/bluerov_ws
 source /opt/ros/humble/setup.bash
 colcon build --symlink-install --packages-up-to ardusub_interface bluerov_sim
-source install/setup.bash
 ```
 
 ## Run the Sim
 
 ```bash
+source install/setup.bash
 ros2 launch bluerov_sim bluerov_sim.launch.py \
   world_name:=dave_ocean_waves \
   ardusub:=true \

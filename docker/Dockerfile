@@ -36,8 +36,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libyaml-cpp-dev \
     pkg-config \
     python3-empy \
-    python3-gz-msgs10 \
-    python3-gz-transport13 \
     python3-colcon-common-extensions \
     python3-setuptools \
     rapidjson-dev \
