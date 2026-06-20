@@ -41,6 +41,7 @@ def launch_setup(context, *args, **kwargs):
     launch_ardusub = LaunchConfiguration("ardusub")
     launch_mavros = LaunchConfiguration("mavros")
     odom_source = LaunchConfiguration("odom_source")
+
     x = LaunchConfiguration("x")
     y = LaunchConfiguration("y")
     z = LaunchConfiguration("z")
