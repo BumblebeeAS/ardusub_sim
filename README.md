@@ -106,3 +106,24 @@ Useful launch switches:
 odom_source:=ground_truth   # default
 odom_source:=none           # no odometry adapter
 ```
+
+## Architecture
+
+The simulation command and feedback loop is:
+
+```text
+ROS command
+→ MAVROS
+→ ArduSub SITL
+→ ArduPilot Gazebo plugin
+→ Gazebo physics
+→ odometry adapter
+→ MAVROS and TF
+```
+
+## Notes
+
+- Map poses use ENU; depth below the surface has negative z.
+- Host networking is required for the default MAVLink ports.
+- If MAVROS is disconnected, check that ArduSub and the Gazebo bridge started.
+- If local position is not updating, check the selected odometry adapter.
