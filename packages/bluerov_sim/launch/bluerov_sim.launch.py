@@ -7,7 +7,6 @@ from launch.actions import (
     LogInfo,
     RegisterEventHandler,
     OpaqueFunction,
-    SetEnvironmentVariable,
 )
 from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit
@@ -42,8 +41,6 @@ def launch_setup(context, *args, **kwargs):
     launch_ardusub = LaunchConfiguration("ardusub")
     launch_mavros = LaunchConfiguration("mavros")
     odom_source = LaunchConfiguration("odom_source")
-    nvidia_offload = LaunchConfiguration("nvidia_offload")
-
     x = LaunchConfiguration("x")
     y = LaunchConfiguration("y")
     z = LaunchConfiguration("z")
@@ -160,25 +157,7 @@ def launch_setup(context, *args, **kwargs):
         ],
     )
 
-    # NVIDIA PRIME render offload: force gz sim's OpenGL rendering (ogre2 +
-    # camera sensors) onto the discrete NVIDIA GPU via GLVND, instead of the
-    # integrated GPU or Mesa software rasterizer (llvmpipe) — software rendering
-    # tanks RTF. Set before the gz_sim include so the gz server process inherits
-    # them. Disable with nvidia_offload:=false on Intel-only / non-NVIDIA hosts.
-    offload_env = [
-        SetEnvironmentVariable(
-            "__NV_PRIME_RENDER_OFFLOAD",
-            "1",
-            condition=IfCondition(nvidia_offload),
-        ),
-        SetEnvironmentVariable(
-            "__GLX_VENDOR_LIBRARY_NAME",
-            "nvidia",
-            condition=IfCondition(nvidia_offload),
-        ),
-    ]
-
-    result = offload_env + [
+    result = [
         ardusub_interface_launch,
         gz_sim_launch,
         gz_spawner,
@@ -192,12 +171,6 @@ def launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     args = [
-        DeclareLaunchArgument(
-            "nvidia_offload",
-            default_value="true",
-            description="Render gz sim on the discrete NVIDIA GPU via PRIME "
-            "offload (set false on non-NVIDIA hosts)",
-        ),
         DeclareLaunchArgument(
             "paused",
             default_value="true",
