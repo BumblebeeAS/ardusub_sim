@@ -93,7 +93,7 @@ def launch_setup(context, *args, **kwargs):
         package="mavros",
         executable="mavros_node",
         output="screen",
-        parameters=[mavros_params_file],
+        parameters=[mavros_params_file, {"use_sim_time": use_sim_time}],
         condition=IfCondition(launch_mavros),
     )
 
