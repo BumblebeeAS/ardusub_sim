@@ -166,6 +166,7 @@ def launch_setup(context, *args, **kwargs):
         gz_bridge,
         robot_state_publisher_node,
     ]
+
     return result
 
 

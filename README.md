@@ -55,6 +55,21 @@ colcon build --symlink-install --packages-up-to ardusub_interface bluerov_sim
 
 ## Run the Sim
 
+On a hybrid NVIDIA system, enable PRIME render offload before launching for better performance:
+
+```bash
+export __NV_PRIME_RENDER_OFFLOAD=1
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+```
+
+These variables are not needed on systems where NVIDIA is already the default renderer. Confirm the selected renderer with:
+
+```bash
+glxinfo -B | grep -E "OpenGL vendor|OpenGL renderer"
+```
+
+Then launch the simulation:
+
 ```bash
 source install/setup.bash
 ros2 launch bluerov_sim bluerov_sim.launch.py \

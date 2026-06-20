@@ -11,10 +11,6 @@ ament_python_install_package(${PROJECT_NAME})
 install(DIRECTORY launch config models urdf
   DESTINATION share/${PROJECT_NAME})
 
-install(PROGRAMS
-  scripts/world_objects_to_markers.py
-  DESTINATION lib/${PROJECT_NAME})
-
 # dave_worlds installs its worlds under share/dave_worlds/worlds, but its own
 # env hook only puts share/dave_worlds on GZ_SIM_RESOURCE_PATH. gz sim searches
 # only the top level of each resource-path root, so a bare world name in that
